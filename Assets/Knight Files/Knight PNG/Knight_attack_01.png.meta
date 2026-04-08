@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 84ce2f114ad12bd4ebafc77060220324
+guid: 192eccda280e2ec4c99be851889e09ed
 AssetOrigin:
   serializedVersion: 1
   productId: 93897
   packageName: Knight Sprite Sheet (Free)
   packageVersion: 1.0
-  assetPath: Assets/Knight Files/Knight PNG/Knight_idle_01.png
+  assetPath: Assets/Knight Files/Knight PNG/Knight_attack_01.png
   uploadId: 199680
 TextureImporter:
   internalIDToNameTable: []
@@ -143,22 +143,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Knight_idle_01_0
+      name: Knight_attack_01_0
       rect:
         serializedVersion: 2
-        x: 202
+        x: 128
         y: 5
-        width: 103
-        height: 149
+        width: 239
+        height: 158
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce6602f1bcc633c49a5323e775376701
-      internalID: -613655507
+      spriteID: aada725e089b94346b886cb4d0ae3e53
+      internalID: 1985115537
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Knight_idle_01_0: -613655507
+      Knight_attack_01_0: 1985115537
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

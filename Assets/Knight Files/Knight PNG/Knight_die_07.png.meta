@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 84ce2f114ad12bd4ebafc77060220324
+guid: bb85b7b5b670de546b0be388480e0a78
 AssetOrigin:
   serializedVersion: 1
   productId: 93897
   packageName: Knight Sprite Sheet (Free)
   packageVersion: 1.0
-  assetPath: Assets/Knight Files/Knight PNG/Knight_idle_01.png
+  assetPath: Assets/Knight Files/Knight PNG/Knight_die_07.png
   uploadId: 199680
 TextureImporter:
   internalIDToNameTable: []
@@ -143,13 +143,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Knight_idle_01_0
+      name: Knight_die_07_0
       rect:
         serializedVersion: 2
-        x: 202
-        y: 5
-        width: 103
-        height: 149
+        x: 204
+        y: 10
+        width: 90
+        height: 117
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,8 +157,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce6602f1bcc633c49a5323e775376701
-      internalID: -613655507
+      spriteID: 1704141ff8ce96046a1431c1e8989b0f
+      internalID: 284177714
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Knight_idle_01_0: -613655507
+      Knight_die_07_0: 284177714
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
