@@ -195,6 +195,22 @@ public class Movimiento2D : MonoBehaviour
 
         _tocandoMuroIzq = LanzaRayo(centroMuroIzq, Vector2.left, distanciaMuro);
         _tocandoMuroDer = LanzaRayo(centroMuroDer, Vector2.right, distanciaMuro);
+
+        // --- SISTEMA DE APLASTAMIENTO ---
+        // Usamos rayos súper cortitos para ver si nos están exprimiendo por ambos lados a la vez
+        float margenAplastamiento = 0.03f;
+        Vector2 origenArriba = new Vector2(limites.center.x, limites.max.y - 0.02f);
+
+        bool aplastadoIzq = LanzaRayo(centroMuroIzq, Vector2.left, margenAplastamiento);
+        bool aplastadoDer = LanzaRayo(centroMuroDer, Vector2.right, margenAplastamiento);
+        bool aplastadoAbajo = LanzaRayo(origenCentro, Vector2.down, margenAplastamiento);
+        bool aplastadoArriba = LanzaRayo(origenArriba, Vector2.up, margenAplastamiento);
+
+        if ((aplastadoIzq && aplastadoDer) || (aplastadoAbajo && aplastadoArriba))
+        {
+            Debug.Log("¡Aplastado por la trampa!");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        }
     }
 
     private bool LanzaRayo(Vector2 origen, Vector2 direccion, float distancia)

@@ -16,34 +16,40 @@ public class GoalCheckpoint : MonoBehaviour
         // Solo se activa si es el Jugador y si no lo hemos activado ya
         if (collision.CompareTag("Player") && !nivelCompletado)
         {
-            // Verificamos si recogió todas las manzanas usando el GameManager
-            if (GameManager.Instance != null && GameManager.Instance.PuedePasarDeNivel())
+            // Verificamos si recogió todas las frutas (si es obligatorio)
+            if (GameManager.Instance != null && !GameManager.Instance.PuedePasarDeNivel())
             {
-                nivelCompletado = true;
-                
-                // 1. Activamos la animación que configuramos
-                anim.SetTrigger("Activate");
-                
-                Debug.Log("¡Nivel superado! Aquí cargaríamos el siguiente nivel.");
+                Debug.Log("¡Aún te faltan frutas para poder terminar el nivel!");
+                return; // No pasa de nivel aún
+            }
 
-                // 2. Ejecutar la función para pasar de nivel tras un pequeño retraso
-                Invoke("PasarDeNivel", 2f); 
-            }
-            else
-            {
-                // Mensaje en caso de que falten manzanas
-                Debug.Log("¡Aún te faltan manzanas para poder terminar el nivel!");
-            }
+            nivelCompletado = true;
+            
+            // 1. Activamos la animación que configuramos
+            anim.SetTrigger("Activate");
+            
+            Debug.Log("¡Nivel superado! Aquí cargaríamos el siguiente nivel.");
+
+            // 2. Ejecutar la función para pasar de nivel tras un pequeño retraso
+            Invoke("PasarDeNivel", 2f); 
         }
     }
 
     void PasarDeNivel()
     {
-        // Por ahora, como no tienes más niveles, reiniciará el mismo nivel
-        // Cuando tengas el Nivel 2, cambiarás "SampleScene" por el nombre de tu siguiente nivel
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // Cargamos el siguiente nivel en la lista de "Build Settings"
+        int siguienteNivel = SceneManager.GetActiveScene().buildIndex + 1;
         
-        // El comando real para el futuro sería:
-        // SceneManager.LoadScene("NombreDeTuNivel2");
+        // Comprobamos si el siguiente nivel existe en los Build Settings antes de cargarlo
+        if (siguienteNivel < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(siguienteNivel);
+        }
+        else
+        {
+            Debug.Log("¡Juego Completado! Volviendo al inicio...");
+            // Vuelve a la primera escena (como un menú principal o el nivel 1)
+            SceneManager.LoadScene(0); 
+        }
     }
 }

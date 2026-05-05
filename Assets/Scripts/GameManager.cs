@@ -7,16 +7,16 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Coleccionables")]
-    public int manzanasRecogidas = 0;
-    public int manzanasNecesarias = 3;
+    [Tooltip("¿Se deben recoger todas las frutas para poder pasar el nivel?")]
+    public bool requiereFrutasParaAvanzar = false;
+    public int frutasRecogidas = 0;
+    public int frutasNecesarias = 3;
 
     [Header("UI de Texto (Opcional)")]
-    public TextMeshProUGUI textoManzanas;
+    public TextMeshProUGUI textoFrutas;
 
     [Header("UI con Imágenes (Opcional)")]
-    [Tooltip("El objeto de la UI que mostrará el número de manzanas que tienes")]
     public Image imagenNumero;
-    [Tooltip("Arrastra aquí los sprites de los números en orden: 0, 1, 2, 3, etc.")]
     public Sprite[] spritesNumeros;
 
     private void Awake()
@@ -32,35 +32,33 @@ public class GameManager : MonoBehaviour
         ActualizarTexto();
     }
 
-    public void RecogerManzana()
+    public void RecogerFruta()
     {
-        manzanasRecogidas++;
-        Debug.Log("¡Manzana recogida! Llevas: " + manzanasRecogidas + "/" + manzanasNecesarias);
+        frutasRecogidas++;
+        Debug.Log("¡Fruta recogida! Llevas: " + frutasRecogidas + "/" + frutasNecesarias);
         ActualizarTexto();
     }
 
     public bool PuedePasarDeNivel()
     {
-        return manzanasRecogidas >= manzanasNecesarias;
+        if (!requiereFrutasParaAvanzar)
+            return true;
+            
+        return frutasRecogidas >= frutasNecesarias;
     }
 
     private void ActualizarTexto()
     {
-        // 1. Actualiza el texto normal si lo tienes
-        if (textoManzanas != null)
+        if (textoFrutas != null)
         {
-            textoManzanas.text = "Manzanas: " + manzanasRecogidas + " / " + manzanasNecesarias;
+            textoFrutas.text = "Frutas: " + frutasRecogidas + " / " + frutasNecesarias;
         }
 
-        // 2. Actualiza la imagen del número si la configuraste
-        // Verificamos que tengamos la imagen, que el arreglo de sprites no esté vacío
-        // y que no nos pasemos de la cantidad de sprites que pusiste
         if (imagenNumero != null && spritesNumeros != null && spritesNumeros.Length > 0)
         {
-            if (manzanasRecogidas < spritesNumeros.Length)
+            if (frutasRecogidas < spritesNumeros.Length)
             {
-                // Cambia la imagen por el sprite correspondiente al número
-                imagenNumero.sprite = spritesNumeros[manzanasRecogidas];
+                imagenNumero.sprite = spritesNumeros[frutasRecogidas];
             }
         }
     }

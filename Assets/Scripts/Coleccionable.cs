@@ -7,10 +7,12 @@ public class Coleccionable : MonoBehaviour
         // Si el jugador toca este objeto
         if (collision.CompareTag("Player"))
         {
-            // Le avisamos al GameManager que recogimos una manzana
-            GameManager.Instance.RecogerManzana();
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.RecogerFruta();
+            }
 
-            // Y destruimos la manzana para que desaparezca
+            // Y destruimos la fruta para que desaparezca
             Destroy(gameObject);
         }
     }
