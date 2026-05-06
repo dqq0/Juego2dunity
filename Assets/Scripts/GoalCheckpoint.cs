@@ -37,19 +37,10 @@ public class GoalCheckpoint : MonoBehaviour
 
     void PasarDeNivel()
     {
-        // Cargamos el siguiente nivel en la lista de "Build Settings"
-        int siguienteNivel = SceneManager.GetActiveScene().buildIndex + 1;
-        
-        // Comprobamos si el siguiente nivel existe en los Build Settings antes de cargarlo
-        if (siguienteNivel < SceneManager.sceneCountInBuildSettings)
+        // Usamos la nueva función del GameManager que arreglamos
+        if (GameManager.Instance != null)
         {
-            SceneManager.LoadScene(siguienteNivel);
-        }
-        else
-        {
-            Debug.Log("¡Juego Completado! Volviendo al inicio...");
-            // Vuelve a la primera escena (como un menú principal o el nivel 1)
-            SceneManager.LoadScene(0); 
+            GameManager.Instance.SiguienteNivel();
         }
     }
 }

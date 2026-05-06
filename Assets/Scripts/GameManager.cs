@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour
     public GameObject menuPausaPanel; // Arrastra aquí tu panel de pausa
     private bool juegoPausado = false;
 
+    [Header("Estados del Juego (Ganar/Perder)")]
+    public GameObject panelGanar;
+    public GameObject panelPerder;
+    private bool juegoTerminado = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -36,18 +41,19 @@ public class GameManager : MonoBehaviour
     {
         ActualizarTexto();
         
-        // Asegurarnos de que al iniciar el juego, la pausa esté desactivada
-        if (menuPausaPanel != null)
-        {
-            menuPausaPanel.SetActive(false);
-        }
+        // Asegurarnos de que al iniciar el juego, los paneles estén desactivados
+        if (menuPausaPanel != null) menuPausaPanel.SetActive(false);
+        if (panelGanar != null) panelGanar.SetActive(false);
+        if (panelPerder != null) panelPerder.SetActive(false);
+        
         Time.timeScale = 1f; 
+        juegoTerminado = false;
     }
 
     private void Update()
     {
-        // Detectar cuando se presiona la tecla Escape
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // Detectar cuando se presiona la tecla Escape, solo si el juego no ha terminado
+        if (Input.GetKeyDown(KeyCode.Escape) && !juegoTerminado)
         {
             if (juegoPausado)
             {
@@ -62,6 +68,8 @@ public class GameManager : MonoBehaviour
 
     public void PausarJuego()
     {
+        if (juegoTerminado) return; // No pausar si ya ganamos o perdimos
+
         juegoPausado = true;
         Time.timeScale = 0f; // Esto congela todos los movimientos físicos y animaciones
         
@@ -82,10 +90,54 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GanarJuego()
+    {
+        if (juegoTerminado) return;
+        juegoTerminado = true;
+        
+        if (panelGanar != null) panelGanar.SetActive(true);
+        Time.timeScale = 0f; // Congelamos el juego al ganar
+        
+        // Opcional: Reproducir sonido de victoria aquí
+        // if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX(sonidoVictoria);
+    }
+
+    public void PerderJuego()
+    {
+        if (juegoTerminado) return;
+        juegoTerminado = true;
+        
+        if (panelPerder != null) panelPerder.SetActive(true);
+        Time.timeScale = 0f; // Congelamos el juego al perder
+        
+        // Opcional: Reproducir sonido de derrota aquí
+    }
+
     public void ReiniciarNivel()
     {
         Time.timeScale = 1f; // IMPORTANTE: Descongelar el tiempo antes de recargar
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void SiguienteNivel()
+    {
+        Time.timeScale = 1f; // Descongelar el tiempo
+        int siguienteNivel = SceneManager.GetActiveScene().buildIndex + 1;
+        int totalEscenas = SceneManager.sceneCountInBuildSettings;
+        
+        Debug.Log($"Intentando pasar al nivel índice: {siguienteNivel}. Total de escenas en Build Settings: {totalEscenas}");
+        
+        if (siguienteNivel < totalEscenas)
+        {
+            Debug.Log("Cargando la escena con índice: " + siguienteNivel);
+            SceneManager.LoadScene(siguienteNivel);
+        }
+        else
+        {
+            Debug.Log("No hay más niveles registrados en Build Settings. Volviendo al menú (0).");
+            // Si ya no hay más niveles, volver al menú
+            SceneManager.LoadScene(0); 
+        }
     }
 
     public void SalirAlMenuPrincipal()

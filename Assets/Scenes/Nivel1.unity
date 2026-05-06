@@ -200,6 +200,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f609065cac32c5548bddbc099a446152, type: 3}
+--- !u!1 &28572202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 28572204}
+  - component: {fileID: 28572203}
+  m_Layer: 0
+  m_Name: LevelMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &28572203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28572202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb99d6bf18f902449e5f7909fc75c5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelMusic
+  canciones:
+  - {fileID: 8300000, guid: 896545ba0e1fb9a48abdaaa381b5b78b, type: 3}
+--- !u!4 &28572204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28572202}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 554.7801, y: 205.69995, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &31755363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5051,7 +5097,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelMusic
   canciones:
   - {fileID: 8300000, guid: 896545ba0e1fb9a48abdaaa381b5b78b, type: 3}
-  musicMixerGroup: {fileID: -4262947913676487186, guid: e21a7f857549abf448a1222af115e873, type: 2}
 --- !u!82 &1199184996
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12654,6 +12699,59 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f609065cac32c5548bddbc099a446152, type: 3}
+--- !u!1 &1921746279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1921746281}
+  - component: {fileID: 1921746280}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1921746280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921746279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23efafcb288b0289b94586862d019ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  requiereFrutasParaAvanzar: 1
+  frutasRecogidas: 0
+  frutasNecesarias: 14
+  textoFrutas: {fileID: 0}
+  imagenNumero: {fileID: 0}
+  spritesNumeros: []
+  menuPausaPanel: {fileID: 0}
+  panelGanar: {fileID: 0}
+  panelPerder: {fileID: 0}
+--- !u!4 &1921746281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921746279}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.98542, y: -0.35462, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1953527114
 GameObject:
   m_ObjectHideFlags: 0
@@ -12928,3 +13026,5 @@ SceneRoots:
   - {fileID: 687414845}
   - {fileID: 269644894}
   - {fileID: 1199184997}
+  - {fileID: 28572204}
+  - {fileID: 1921746281}
