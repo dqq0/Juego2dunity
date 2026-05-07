@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         
         Time.timeScale = 1f; 
         juegoTerminado = false;
+        juegoPausado = false;
     }
 
     private void Update()
@@ -166,5 +167,23 @@ public class GameManager : MonoBehaviour
                 imagenNumero.sprite = spritesNumeros[frutasRecogidas];
             }
         }
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.SetMusicVolume(volume);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.SetSFXVolume(volume);
+    }
+
+    public void SetMute(bool isMuted)
+    {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.SetMute(isMuted);
     }
 }
