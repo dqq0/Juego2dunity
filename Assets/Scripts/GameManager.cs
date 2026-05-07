@@ -1,27 +1,26 @@
 using UnityEngine;
-using TMPro; // Para el texto normal
-using UnityEngine.UI; // Necesario para usar Imágenes en la UI
-using UnityEngine.SceneManagement; // Necesario para reiniciar y salir
+using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     [Header("Coleccionables")]
-    [Tooltip("¿Se deben recoger todas las frutas para poder pasar el nivel?")]
     public bool requiereFrutasParaAvanzar = false;
     public int frutasRecogidas = 0;
     public int frutasNecesarias = 3;
 
-    [Header("UI de Texto (Opcional)")]
+    [Header("UI de Texto")]
     public TextMeshProUGUI textoFrutas;
 
-    [Header("UI con Imágenes (Opcional)")]
+    [Header("UI con Imágenes")]
     public Image imagenNumero;
     public Sprite[] spritesNumeros;
 
     [Header("Menú de Pausa")]
-    public GameObject menuPausaPanel; // Arrastra aquí tu panel de pausa
+    public GameObject menuPausaPanel;
     private bool juegoPausado = false;
 
     [Header("Estados del Juego (Ganar/Perder)")]
@@ -41,7 +40,6 @@ public class GameManager : MonoBehaviour
     {
         ActualizarTexto();
         
-        // Asegurarnos de que al iniciar el juego, los paneles estén desactivados
         if (menuPausaPanel != null) menuPausaPanel.SetActive(false);
         if (panelGanar != null) panelGanar.SetActive(false);
         if (panelPerder != null) panelPerder.SetActive(false);
@@ -52,7 +50,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // Detectar cuando se presiona la tecla Escape, solo si el juego no ha terminado
         if (Input.GetKeyDown(KeyCode.Escape) && !juegoTerminado)
         {
             if (juegoPausado)
@@ -68,10 +65,10 @@ public class GameManager : MonoBehaviour
 
     public void PausarJuego()
     {
-        if (juegoTerminado) return; // No pausar si ya ganamos o perdimos
+        if (juegoTerminado) return;
 
         juegoPausado = true;
-        Time.timeScale = 0f; // Esto congela todos los movimientos físicos y animaciones
+        Time.timeScale = 0f; 
         
         if (menuPausaPanel != null)
         {
@@ -82,7 +79,7 @@ public class GameManager : MonoBehaviour
     public void ReanudarJuego()
     {
         juegoPausado = false;
-        Time.timeScale = 1f; // Vuelve el tiempo a la normalidad
+        Time.timeScale = 1f;
         
         if (menuPausaPanel != null)
         {
@@ -96,10 +93,7 @@ public class GameManager : MonoBehaviour
         juegoTerminado = true;
         
         if (panelGanar != null) panelGanar.SetActive(true);
-        Time.timeScale = 0f; // Congelamos el juego al ganar
-        
-        // Opcional: Reproducir sonido de victoria aquí
-        // if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX(sonidoVictoria);
+        Time.timeScale = 0f; 
     }
 
     public void PerderJuego()
@@ -108,20 +102,18 @@ public class GameManager : MonoBehaviour
         juegoTerminado = true;
         
         if (panelPerder != null) panelPerder.SetActive(true);
-        Time.timeScale = 0f; // Congelamos el juego al perder
-        
-        // Opcional: Reproducir sonido de derrota aquí
+        Time.timeScale = 0f; 
     }
 
     public void ReiniciarNivel()
     {
-        Time.timeScale = 1f; // IMPORTANTE: Descongelar el tiempo antes de recargar
+        Time.timeScale = 1f; 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void SiguienteNivel()
     {
-        Time.timeScale = 1f; // Descongelar el tiempo
+        Time.timeScale = 1f;
         int siguienteNivel = SceneManager.GetActiveScene().buildIndex + 1;
         int totalEscenas = SceneManager.sceneCountInBuildSettings;
         
@@ -135,15 +127,14 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("No hay más niveles registrados en Build Settings. Volviendo al menú (0).");
-            // Si ya no hay más niveles, volver al menú
             SceneManager.LoadScene(0); 
         }
     }
 
     public void SalirAlMenuPrincipal()
     {
-        Time.timeScale = 1f; // Descongelar el tiempo
-        SceneManager.LoadScene(0); // El índice 0 debe ser tu escena MenuPrincipal
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
     }
 
     public void RecogerFruta()

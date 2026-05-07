@@ -17,18 +17,15 @@ public class Movimiento2D : MonoBehaviour
     [Tooltip("Controla el mini-salto si sueltas el botón rápido")]
     public float multiplicadorGravedadCorto = 2f;
     
-    [Header("Ventanas de Gracia (Game Feel)")]
-    [Tooltip("Tiempo para saltar justo después de caerse de la cornisa")]
+    [Header("Ventanas de Gracia")]
     public float tiempoCoyote = 0.1f;
-    [Tooltip("El juego 'recuerda' si apretaste salto un milisegundo antes de aterrizar")]
     public float tiempoBufferSalto = 0.1f;
 
     [Header("Salto de Muro (Wall Jump)")]
     public float velocidadDeslizamientoMuro = 2f;
     public Vector2 poderSaltoMuro = new Vector2(10f, 15f);
 
-    [Header("OBLIGATORIO: Detección")]
-    [Tooltip("Debes seleccionar aquí la capa (Layer) en la que está el Piso")]
+    [Header("Detección")]
     public LayerMask capaPiso;
 
     // Privadas
@@ -196,8 +193,6 @@ public class Movimiento2D : MonoBehaviour
         _tocandoMuroIzq = LanzaRayo(centroMuroIzq, Vector2.left, distanciaMuro);
         _tocandoMuroDer = LanzaRayo(centroMuroDer, Vector2.right, distanciaMuro);
 
-        // --- SISTEMA DE APLASTAMIENTO ---
-        // Usamos rayos súper cortitos para ver si nos están exprimiendo por ambos lados a la vez
         float margenAplastamiento = 0.03f;
         Vector2 origenArriba = new Vector2(limites.center.x, limites.max.y - 0.02f);
 
@@ -209,7 +204,14 @@ public class Movimiento2D : MonoBehaviour
         if ((aplastadoIzq && aplastadoDer) || (aplastadoAbajo && aplastadoArriba))
         {
             Debug.Log("¡Aplastado por la trampa!");
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.PerderJuego();
+            }
+            else
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            }
         }
     }
 
@@ -224,7 +226,6 @@ public class Movimiento2D : MonoBehaviour
         return false;
     }
 
-    // ¡ESTO ES NUEVO! Te dibujará los láseres en la pantalla del editor para que veas si tocan el piso.
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;

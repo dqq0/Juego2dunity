@@ -28,19 +28,13 @@ public class GoalCheckpoint : MonoBehaviour
             // 1. Activamos la animación que configuramos
             anim.SetTrigger("Activate");
             
-            Debug.Log("¡Nivel superado! Aquí cargaríamos el siguiente nivel.");
+            Debug.Log("¡Nivel superado! Mostrando panel de victoria.");
 
-            // 2. Ejecutar la función para pasar de nivel tras un pequeño retraso
-            Invoke("PasarDeNivel", 2f); 
-        }
-    }
-
-    void PasarDeNivel()
-    {
-        // Usamos la nueva función del GameManager que arreglamos
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.SiguienteNivel();
+            // 2. Ejecutar la función para mostrar panel de ganar
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.GanarJuego();
+            }
         }
     }
 }

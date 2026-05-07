@@ -12,23 +12,20 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        // Cargar las preferencias de volumen si existen para actualizar la UI
         LoadVolumeUI();
     }
 
     public void Jugar()
     {
-        // Esto carga la siguiente escena en la lista de Build Settings
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Salir()
     {
-        Debug.Log("¡El jugador ha salido del juego!"); // Visible en el editor
-        Application.Quit(); // Cierra el juego al estar compilado
+        Debug.Log("¡El jugador ha salido del juego!");
+        Application.Quit();
     }
 
-    // Estos métodos son llamados por los eventos OnValueChanged de la UI
     public void SetMusicVolume(float volume)
     {
         if (muteToggle != null && muteToggle.isOn) return;

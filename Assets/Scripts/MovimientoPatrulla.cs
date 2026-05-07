@@ -45,8 +45,15 @@ public class MovimientoPatrulla : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Debug.Log("¡La sierra cortó al jugador!");
-            // Reinicia el nivel actual de tu demo
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.PerderJuego();
+            }
+            else
+            {
+                // Respaldo por si no hay GameManager
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
 }
